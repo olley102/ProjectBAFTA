@@ -4,20 +4,37 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
     private Transform player;
     private Vector3 relCameraPos;
-    private Vector3 newPos;
-
+    private float newY; // The Y that the camera will lerping to
+	private float t; // Keeps track of time for lerp 
+	public float followSpeed; // Speed of the camera's lerp on Y
     void Awake() {
         player = GameObject.Find("BlueBall").transform;
         relCameraPos = transform.position - player.position;
+		newY = player.position.y + relCameraPos.y;
+		t = 0;
+
     }
 
     void FixedUpdate() {
-        if (player.position.y - transform.position.y > 8 || player.position.y - transform.position.y < -3) {
-            newPos = new Vector3(player.position.x + relCameraPos.x, player.position.y + relCameraPos.y, player.position.z + relCameraPos.z);
+		if ((transform.position.y - player.position.y < -2.5 + relCameraPos.y) && (player.position.y + relCameraPos.y - 2.5f > newY )) { // If it goes Below the bottom of the bounce
+            newY = player.position.y + relCameraPos.y - 2.5f;
+			t = 0;
         }
-        else {
-            newPos = new Vector3(player.position.x + relCameraPos.x, transform.position.y, player.position.z + relCameraPos.z);
-        }
-        transform.position = newPos;
+
+		if ((transform.position.y - player.position.y > relCameraPos.y) && (player.position.y + relCameraPos.y < newY )) { // If it goes above the top of the bounce
+			newY = player.position.y + relCameraPos.y;
+			t = 0;
+		} 
+
+		//if (BallKinematics.Kinematics.bounceHeight + relCameraPos.y > newY) { // If the ball bounces higher than expected, indicating that it has moved up:
+		//	newY = BallKinematics.Kinematics.bounceHeight + relCameraPos.y;
+		//	t = 0;
+		//}
+
+		//wip
+	
+
+		t = t + Time.deltaTime * followSpeed;
+		transform.position = new Vector3(player.position.x + relCameraPos.x, Mathf.Lerp(transform.position.y, newY, t), player.position.z + relCameraPos.z);
     }
 }
