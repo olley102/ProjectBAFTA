@@ -8,6 +8,8 @@ public class BallKinematics : MonoBehaviour {
     public Rigidbody rb;
 	public float bounceHeight; // For the camera to move up.
 	public float TopbounceHeight; // For the camera to move down.
+	public bool CanSwap = true;
+	public bool BounceBeforeGravity;
 
 	void Start () {
         rb = GetComponent<Rigidbody>();
@@ -17,8 +19,9 @@ public class BallKinematics : MonoBehaviour {
 	}
 	
 	void Update () {
-		if ((Input.GetKeyDown (KeyCode.Space))) {
+		if ((Input.GetKeyDown (KeyCode.Space)) && (CanSwap == true || BounceBeforeGravity == false)) {
 			Physics.gravity = new Vector3 (Physics.gravity.x, 0 - Physics.gravity.y, Physics.gravity.z);
+			CanSwap = false;
 		}
 	}
 
@@ -26,10 +29,13 @@ public class BallKinematics : MonoBehaviour {
         if (collision.gameObject.tag == "PlatformLower") { // if platform on bottom, go up
             rb.velocity = new Vector3(rb.velocity.x, v0, rb.velocity.z);
 			bounceHeight = transform.position.y;
+			CanSwap = true;
+
         }
 		if (collision.gameObject.tag == "PlatformUpper") { // if platform on top, go down
 			rb.velocity = new Vector3(rb.velocity.x, 0-v0, rb.velocity.z);
 			TopbounceHeight = transform.position.y;
+			CanSwap = true;
 		}
     }
 }
