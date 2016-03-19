@@ -19,16 +19,14 @@ public class FlipLightOnGravity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((Input.GetKeyDown(KeyCode.Space)) && (BallKinematics.Kinematics.CanSwap || !BallKinematics.Kinematics.BounceBeforeGravity)) {
-            newrot = Quaternion.Euler(eulerX * -1, eulerY * -1, eulerZ);
+			newrot = Quaternion.Euler(eulerX * -1, eulerY * -1, eulerZ);
             eulerX *= -1;
             eulerY *= -1;
-			t = 0;
+			t = 0f;
         }
+		t = t + Time.deltaTime * lerpspeed;
 		if (t < 1) {
-			t = t + Time.deltaTime * lerpspeed;
-		} else {
-			t = 1;
-		}
-		transform.rotation = Quaternion.LerpUnclamped (transform.rotation, newrot, t);
+			transform.rotation = Quaternion.Lerp(transform.rotation, newrot, t);
+		} 
     }
 }
