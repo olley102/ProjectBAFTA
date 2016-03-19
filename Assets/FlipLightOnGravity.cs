@@ -18,7 +18,7 @@ public class FlipLightOnGravity : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if ((Input.GetKeyDown(KeyCode.Space))) {
+		if ((Input.GetKeyDown(KeyCode.Space)) && (BallKinematics.Kinematics.CanSwap || !BallKinematics.Kinematics.BounceBeforeGravity)) {
             newrot = Quaternion.Euler(eulerX * -1, eulerY * -1, eulerZ);
             eulerX *= -1;
             eulerY *= -1;
