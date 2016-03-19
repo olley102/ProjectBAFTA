@@ -20,9 +20,8 @@ public class CameraController : MonoBehaviour {
 	void Update() {
 		// Camera Position
 		if (Physics.gravity.y == 0 - firstG) { // If up-side down.
-			print("AG");
 
-			if (BallKinematics.Kinematics.TopbounceHeight - relCameraPos.y < newY) { // If the ball bounces higher than expected, indicating that it has moved up:
+			if (BallKinematics.Kinematics.TopbounceHeight - relCameraPos.y < newY) { // If the ball bounces lower than expected, indicating that it has moved up:
 				newY = BallKinematics.Kinematics.TopbounceHeight - relCameraPos.y;
 				BallKinematics.Kinematics.TopbounceHeight = 1024;
 				t = 0;
@@ -33,11 +32,7 @@ public class CameraController : MonoBehaviour {
 				t = 0;
 			} 
 
-			t = t + Time.deltaTime * followSpeed;
-			transform.position = new Vector3 (player.position.x + relCameraPos.x, Mathf.Lerp (transform.position.y, newY, t), player.position.z + relCameraPos.z);
-
 		} else { // If right way up
-			print("G");
 
 			if (BallKinematics.Kinematics.bounceHeight + relCameraPos.y > newY) { // If the ball bounces higher than expected, indicating that it has moved up:
 				newY = BallKinematics.Kinematics.bounceHeight + relCameraPos.y;
@@ -45,33 +40,13 @@ public class CameraController : MonoBehaviour {
 				t = 0;
 			}
 
-			if ((transform.position.y - player.position.y > relCameraPos.y) && (player.position.y + relCameraPos.y < newY)) { // If it goes above the top of the bounce
+			if ((transform.position.y - player.position.y > relCameraPos.y) && (player.position.y + relCameraPos.y < newY)) { // If it goes below the bottom of the bounce
 				newY = player.position.y + relCameraPos.y;
 				t = 0;
 			} 
-
-			//if ((transform.position.y - player.position.y < -2.5 + relCameraPos.y) && (player.position.y + relCameraPos.y - 2.5f > newY )) { // If it goes Below the bottom of the bounce
-			//    newY = player.position.y + relCameraPos.y - 2.5f;
-			//    t = 0;
-			//}
-			// OLD
-
-			t = t + Time.deltaTime * followSpeed;
-			transform.position = new Vector3 (player.position.x + relCameraPos.x, Mathf.Lerp (transform.position.y, newY, t), player.position.z + relCameraPos.z);
 		}
-
-		// Camera Rotation (not used)
-
-		//if (Physics.gravity.y == 0 - expectedG) {
-		//    expectedG = Physics.gravity.y;
-		//    print ("rot");
-		//    newrot = ((newrot + 180)%360);
-		//    rotT = 0;
-		//}
-		//rotT = rotT + Time.deltaTime;
-
-		//newQuat.eulerAngles = new Vector3(10, 0, Mathf.Lerp(transform.rotation.eulerAngles.z, newrot, rotT));
-		//transform.rotation = newQuat;
+		t = t + Time.deltaTime * followSpeed;
+		transform.position = new Vector3 (player.position.x + relCameraPos.x, Mathf.Lerp (transform.position.y, newY, t), player.position.z + relCameraPos.z);
 	}
 }
 

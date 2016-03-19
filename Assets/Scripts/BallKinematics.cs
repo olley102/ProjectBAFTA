@@ -23,11 +23,11 @@ public class BallKinematics : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "PlatformLower") {
+        if (collision.gameObject.tag == "PlatformLower") { // if platform on bottom, go up
             rb.velocity = new Vector3(rb.velocity.x, v0, rb.velocity.z);
 			bounceHeight = transform.position.y;
         }
-		if (collision.gameObject.tag == "PlatformUpper") {
+		if (collision.gameObject.tag == "PlatformUpper") { // if platform on top, go down
 			rb.velocity = new Vector3(rb.velocity.x, 0-v0, rb.velocity.z);
 			TopbounceHeight = transform.position.y;
 		}
