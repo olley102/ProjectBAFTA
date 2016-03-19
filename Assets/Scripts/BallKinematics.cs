@@ -11,8 +11,8 @@ public class BallKinematics : MonoBehaviour {
 
 	void Start () {
         rb = GetComponent<Rigidbody>();
-		bounceHeight = -256;
-		TopbounceHeight = 256;
+		bounceHeight = -256f;
+		TopbounceHeight = 256f;
 		Kinematics = this;
 	}
 	
