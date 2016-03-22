@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GUI\GUICamera.cs" />
+     <Compile Include="Assets\GUI\LevelSelect\LevelContoller.cs" />
      <Compile Include="Assets\Scripts\BallController.cs" />
      <Compile Include="Assets\Scripts\BallKinematics.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
