@@ -5,10 +5,12 @@ public class BallController : MonoBehaviour {
 
     public float velocity;
     private Rigidbody rb;
+    public static BallController Script;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        Script = this;
     }
 	
 	// Update is called once per frame

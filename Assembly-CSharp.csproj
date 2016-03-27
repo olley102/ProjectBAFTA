@@ -49,8 +49,12 @@
      <Compile Include="Assets\GUI\LevelSelect\LevelContoller.cs" />
      <Compile Include="Assets\Scripts\BallController.cs" />
      <Compile Include="Assets\Scripts\BallKinematics.cs" />
+     <Compile Include="Assets\Scripts\BreakOff.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\DestroyOnTimer.cs" />
+     <Compile Include="Assets\Scripts\DestroyTimer.cs" />
      <Compile Include="Assets\Scripts\FlipLightOnGravity.cs" />
+     <Compile Include="Assets\Scripts\MoveForward.cs" />
      <Compile Include="Assets\Scripts\PlatformGen.cs" />
      <Compile Include="Assets\Skyboxes\GalaxyBox1\examplescene.cs" />
      <None Include="Assets\Skyboxes\GalaxyBox1\instructions.txt" />
